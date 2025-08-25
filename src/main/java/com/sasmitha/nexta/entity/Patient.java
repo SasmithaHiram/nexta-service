@@ -9,13 +9,15 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-@Table(name = "doctors")
-public class Doctor {
+@Table(name = "patients")
+public class Patient {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String specialization;
+    private String age;
+
+    private String medicalHistory;
 
     @OneToOne
     private User user;

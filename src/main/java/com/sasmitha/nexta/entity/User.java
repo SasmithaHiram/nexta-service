@@ -2,16 +2,14 @@ package com.sasmitha.nexta.entity;
 
 import com.sasmitha.nexta.util.Role;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Setter
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 @Table(name = "users")
 public class User {
     @Id
