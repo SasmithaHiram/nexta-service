@@ -17,6 +17,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserEntity register(UserRegisterRequest userRegisterRequest) {
         UserEntity userEntity = new UserEntity();
+        userEntity.setName(userRegisterRequest.getName());
         userEntity.setEmail(userRegisterRequest.getEmail());
         userEntity.setPassword(userRegisterRequest.getPassword());
 
@@ -25,7 +26,6 @@ public class UserServiceImpl implements UserService {
         } else {
             userEntity.setRole(Role.STUDENT);
         }
-
         return userRepository.save(userEntity);
     }
 }
