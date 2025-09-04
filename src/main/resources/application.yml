@@ -1,16 +1,16 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/nexta?createDatabaseIfNotExist=true
+    url: jdbc:mysql://localhost:3306/lms?createDatabaseIfNotExist=true
     username: root
     password: 1234
 
-    jpa:
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+    properties:
       hibernate:
-        ddl-auto: create
-      show-sql: true
-      properties:
-        hibernate:
-          format_sql: true
+        format_sql: true
 
 jwt:
   secret: 12345678910
