@@ -5,7 +5,9 @@ import com.sasmitha.lms.dto.UserRegisterRequest;
 import com.sasmitha.lms.entity.UserEntity;
 
 public interface UserService {
-    UserEntity register(UserRegisterRequest userRegisterRequest);
+    UserEntity userRegister(UserRegisterRequest userRegisterRequest);
 
     UserEntity login(UserLoginRequest userLoginRequest);
+
+    UserEntity instructorRegister(UserRegisterRequest userRegisterRequest);
 }

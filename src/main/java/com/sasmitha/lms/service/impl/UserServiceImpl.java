@@ -19,7 +19,7 @@ public class UserServiceImpl implements UserService {
     private final PasswordEncoder passwordEncoder;
 
     @Override
-    public UserEntity register(UserRegisterRequest userRegisterRequest) {
+    public UserEntity userRegister(UserRegisterRequest userRegisterRequest) {
         Optional<UserEntity> existingUser = userRepository.findByEmail(userRegisterRequest.getEmail());
 
         if (existingUser.isPresent()) {
@@ -48,5 +48,15 @@ public class UserServiceImpl implements UserService {
             throw new RuntimeException("Incorrect password");
         }
         return user;
+    }
+
+    @Override
+    public UserEntity instructorRegister(UserRegisterRequest userRegisterRequest) {
+        UserEntity userEntity = new UserEntity();
+        userEntity.setName(userRegisterRequest.getName());
+        userEntity.setEmail(userRegisterRequest.getEmail());
+        userEntity.setPassword(passwordEncoder.encode(userRegisterRequest.getPassword()));
+        userEntity.setRole(Role.INSTRUCTOR);
+        return userRepository.save(userEntity);
     }
 }
