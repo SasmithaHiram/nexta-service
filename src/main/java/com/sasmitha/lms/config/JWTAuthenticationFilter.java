@@ -16,8 +16,8 @@ import java.util.Collections;
 
 @RequiredArgsConstructor
 public class JWTAuthenticationFilter extends OncePerRequestFilter {
-    private JWTUtil jwtUtil;
-    private UserRepository userRepository;
+    private final JWTUtil jwtUtil;
+    private final UserRepository userRepository;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
