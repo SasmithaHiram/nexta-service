@@ -20,9 +20,7 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public UserEntity userRegister(RegisterRequest registerRequest) {
-        Optional<UserEntity> existingUser = userRepository.findByEmail(registerRequest.getEmail());
-
-        if (existingUser.isPresent()) {
+        if (userRepository.existsByEmail(registerRequest.getEmail())) {
             throw new RuntimeException("User with email " + registerRequest.getEmail() + " already exists");
         }
 
@@ -30,12 +28,7 @@ public class AuthServiceImpl implements AuthService {
         userEntity.setUsername(registerRequest.getUsername());
         userEntity.setEmail(registerRequest.getEmail());
         userEntity.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
-
-        if (userRepository.count() == 0) {
-            userEntity.setRole(Role.ADMIN);
-        } else {
-            userEntity.setRole(Role.STUDENT);
-        }
+        userEntity.setRole(registerRequest.getRole());
         return userRepository.save(userEntity);
     }
 
