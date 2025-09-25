@@ -13,5 +13,5 @@ spring:
         format_sql: true
 
 jwt:
-  secret: mysuperlongsecretkey1234567890abcd1234abcd5678
+  secret: b4k9yZs2gM7jVq8P5nLdH1QvR+F0xZpWq3B9jH8eF2yK0sT1mNcA5vLq7bD4gH6j
   expiration: 86400000 # 1 day

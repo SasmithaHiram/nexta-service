@@ -1,6 +1,7 @@
 package com.sasmitha.lms.controller;
 
 import com.sasmitha.lms.config.JWTUtil;
+import com.sasmitha.lms.dto.AuthResponse;
 import com.sasmitha.lms.dto.UserLoginRequest;
 import com.sasmitha.lms.dto.RegisterRequest;
 import com.sasmitha.lms.dto.UserResponse;
@@ -32,10 +33,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public Map<String, String> userLogin(@RequestBody UserLoginRequest userLoginRequest) {
-        UserEntity login = userService.login(userLoginRequest);
-        String token = jwtUtil.generateToken(login.getEmail());
-        System.out.println(token);
-        return Map.of("token", token);
+    public AuthResponse userLogin(@RequestBody UserLoginRequest userLoginRequest) {
+        return userService.login(userLoginRequest);
     }
 }
