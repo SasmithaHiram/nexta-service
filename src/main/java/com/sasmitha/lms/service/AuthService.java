@@ -9,6 +9,4 @@ public interface AuthService {
     UserEntity userRegister(RegisterRequest registerRequest);
 
     AuthResponse login(UserLoginRequest userLoginRequest);
-
-    UserEntity instructorRegister(RegisterRequest registerRequest);
 }

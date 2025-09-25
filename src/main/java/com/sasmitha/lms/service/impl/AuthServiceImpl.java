@@ -44,15 +44,4 @@ public class AuthServiceImpl implements AuthService {
         String token = jwtUtil.generateToken(user.getEmail());
         return new AuthResponse(token);
     }
-
-    @Override
-    public UserEntity instructorRegister(RegisterRequest registerRequest) {
-        return null;
-//        UserEntity userEntity = new UserEntity();
-//        userEntity.setName(userRegisterRequest.getName());
-//        userEntity.setEmail(userRegisterRequest.getEmail());
-//        userEntity.setPassword(passwordEncoder.encode(userRegisterRequest.getPassword()));
-//        userEntity.setRole(Role.INSTRUCTOR);
-//        return userRepository.save(userEntity);
-    }
 }
