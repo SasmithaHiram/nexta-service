@@ -1,13 +1,9 @@
 package com.sasmitha.lms.config;
 
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.security.Keys;
+import io.jsonwebtoken.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import java.nio.charset.StandardCharsets;
-import java.security.Key;
 import java.util.Date;
 
 @Component
@@ -18,38 +14,29 @@ public class JWTUtil {
     @Value("${jwt.expiration}")
     private Long expiration;
 
-    private Key getSigningKey() {
-        return Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
-    }
-
-    public String generateToken(String email) {
+    public String generateToken(String subject) {
         return Jwts.builder()
-                .setSubject(email)
+                .setSubject(subject)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + expiration))
-                .signWith(getSigningKey(), SignatureAlgorithm.HS256)
+                .signWith(SignatureAlgorithm.HS512, secret)
                 .compact();
     }
 
-//    public String extractEmail(String token) {
-//        Claims claims = Jwts.parser()
-//                .setSigningKey(getSigningKey())
-//                .build()
-//                .parseClaimsJws(token)
-//                .getBody();
-//
-//        return claims.getSubject();
-//    }
-//
-//    public boolean validateToken(String token) {
-//        try {
-//            Jwts.parser().setSigningKey(getSigningKey())
-//                    .build()
-//                    .parseClaimsJws(token);
-//            return true;
-//        } catch (Exception exe) {
-//            return false;
-//        }
-//    }
+    public String getSubjectFromToken(String token) {
+        return Jwts.parser()
+                .setSigningKey(secret)
+                .parseClaimsJws(token)
+                .getBody()
+                .getSubject();
+    }
 
+    public boolean validateToken(String token) {
+        try {
+            Jwts.parser().setSigningKey(secret).parseClaimsJws(token);
+            return true;
+        } catch (MalformedJwtException | ExpiredJwtException | UnsupportedJwtException | IllegalArgumentException exc) {
+            return false;
+        }
+    }
 }

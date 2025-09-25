@@ -20,11 +20,15 @@ public class UserEntity {
 
     private String username;
 
+    @Column(nullable = false, unique = true)
     private String email;
 
     private String password;
 
+    private String profilePicURL;
+
+    private boolean enabled = true;
+
     @Enumerated(EnumType.STRING)
     private Role role;
-
 }

@@ -1,7 +1,7 @@
 package com.sasmitha.lms.service.impl;
 
 import com.sasmitha.lms.dto.UserLoginRequest;
-import com.sasmitha.lms.dto.UserRegisterRequest;
+import com.sasmitha.lms.dto.RegisterRequest;
 import com.sasmitha.lms.entity.UserEntity;
 import com.sasmitha.lms.repository.UserRepository;
 import com.sasmitha.lms.service.AuthService;
@@ -19,17 +19,17 @@ public class AuthServiceImpl implements AuthService {
     private final PasswordEncoder passwordEncoder;
 
     @Override
-    public UserEntity userRegister(UserRegisterRequest userRegisterRequest) {
-        Optional<UserEntity> existingUser = userRepository.findByEmail(userRegisterRequest.getEmail());
+    public UserEntity userRegister(RegisterRequest registerRequest) {
+        Optional<UserEntity> existingUser = userRepository.findByEmail(registerRequest.getEmail());
 
         if (existingUser.isPresent()) {
-            throw new RuntimeException("User with email " + userRegisterRequest.getEmail() + " already exists");
+            throw new RuntimeException("User with email " + registerRequest.getEmail() + " already exists");
         }
 
         UserEntity userEntity = new UserEntity();
-        userEntity.setUsername(userRegisterRequest.getUsername());
-        userEntity.setEmail(userRegisterRequest.getEmail());
-        userEntity.setPassword(passwordEncoder.encode(userRegisterRequest.getPassword()));
+        userEntity.setUsername(registerRequest.getUsername());
+        userEntity.setEmail(registerRequest.getEmail());
+        userEntity.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
 
         if (userRepository.count() == 0) {
             userEntity.setRole(Role.ADMIN);
@@ -51,7 +51,7 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public UserEntity instructorRegister(UserRegisterRequest userRegisterRequest) {
+    public UserEntity instructorRegister(RegisterRequest registerRequest) {
         return null;
 //        UserEntity userEntity = new UserEntity();
 //        userEntity.setName(userRegisterRequest.getName());

@@ -1,13 +1,13 @@
 package com.sasmitha.lms.service;
 
 import com.sasmitha.lms.dto.UserLoginRequest;
-import com.sasmitha.lms.dto.UserRegisterRequest;
+import com.sasmitha.lms.dto.RegisterRequest;
 import com.sasmitha.lms.entity.UserEntity;
 
 public interface AuthService {
-    UserEntity userRegister(UserRegisterRequest userRegisterRequest);
+    UserEntity userRegister(RegisterRequest registerRequest);
 
     UserEntity login(UserLoginRequest userLoginRequest);
 
-    UserEntity instructorRegister(UserRegisterRequest userRegisterRequest);
+    UserEntity instructorRegister(RegisterRequest registerRequest);
 }
