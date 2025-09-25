@@ -4,7 +4,7 @@ import com.sasmitha.lms.dto.UserLoginRequest;
 import com.sasmitha.lms.dto.UserRegisterRequest;
 import com.sasmitha.lms.entity.UserEntity;
 import com.sasmitha.lms.repository.UserRepository;
-import com.sasmitha.lms.service.UserService;
+import com.sasmitha.lms.service.AuthService;
 import com.sasmitha.lms.util.Role;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -14,7 +14,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class UserServiceImpl implements UserService {
+public class AuthServiceImpl implements AuthService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
@@ -27,7 +27,7 @@ public class UserServiceImpl implements UserService {
         }
 
         UserEntity userEntity = new UserEntity();
-        userEntity.setName(userRegisterRequest.getName());
+        userEntity.setUsername(userRegisterRequest.getUsername());
         userEntity.setEmail(userRegisterRequest.getEmail());
         userEntity.setPassword(passwordEncoder.encode(userRegisterRequest.getPassword()));
 
@@ -52,11 +52,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserEntity instructorRegister(UserRegisterRequest userRegisterRequest) {
-        UserEntity userEntity = new UserEntity();
-        userEntity.setName(userRegisterRequest.getName());
-        userEntity.setEmail(userRegisterRequest.getEmail());
-        userEntity.setPassword(passwordEncoder.encode(userRegisterRequest.getPassword()));
-        userEntity.setRole(Role.INSTRUCTOR);
-        return userRepository.save(userEntity);
+        return null;
+//        UserEntity userEntity = new UserEntity();
+//        userEntity.setName(userRegisterRequest.getName());
+//        userEntity.setEmail(userRegisterRequest.getEmail());
+//        userEntity.setPassword(passwordEncoder.encode(userRegisterRequest.getPassword()));
+//        userEntity.setRole(Role.INSTRUCTOR);
+//        return userRepository.save(userEntity);
     }
 }

@@ -5,7 +5,7 @@ import com.sasmitha.lms.dto.UserLoginRequest;
 import com.sasmitha.lms.dto.UserRegisterRequest;
 import com.sasmitha.lms.dto.UserResponse;
 import com.sasmitha.lms.entity.UserEntity;
-import com.sasmitha.lms.service.UserService;
+import com.sasmitha.lms.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,7 +16,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 @CrossOrigin
 public class AuthController {
-    private final UserService userService;
+    private final AuthService userService;
     private final JWTUtil jwtUtil;
 
     @PostMapping("/register")
@@ -25,7 +25,7 @@ public class AuthController {
 
         return new UserResponse(
                 register.getId(),
-                register.getName(),
+                register.getUsername(),
                 register.getEmail(),
                 register.getRole().name()
         );

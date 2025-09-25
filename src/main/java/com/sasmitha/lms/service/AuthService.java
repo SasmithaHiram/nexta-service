@@ -4,7 +4,7 @@ import com.sasmitha.lms.dto.UserLoginRequest;
 import com.sasmitha.lms.dto.UserRegisterRequest;
 import com.sasmitha.lms.entity.UserEntity;
 
-public interface UserService {
+public interface AuthService {
     UserEntity userRegister(UserRegisterRequest userRegisterRequest);
 
     UserEntity login(UserLoginRequest userLoginRequest);

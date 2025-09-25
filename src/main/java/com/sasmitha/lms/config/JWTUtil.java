@@ -1,6 +1,5 @@
 package com.sasmitha.lms.config;
 
-import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
@@ -32,25 +31,25 @@ public class JWTUtil {
                 .compact();
     }
 
-    public String extractEmail(String token) {
-        Claims claims = Jwts.parser()
-                .setSigningKey(getSigningKey())
-                .build()
-                .parseClaimsJws(token)
-                .getBody();
-
-        return claims.getSubject();
-    }
-
-    public boolean validateToken(String token) {
-        try {
-            Jwts.parser().setSigningKey(getSigningKey())
-                    .build()
-                    .parseClaimsJws(token);
-            return true;
-        } catch (Exception exe) {
-            return false;
-        }
-    }
+//    public String extractEmail(String token) {
+//        Claims claims = Jwts.parser()
+//                .setSigningKey(getSigningKey())
+//                .build()
+//                .parseClaimsJws(token)
+//                .getBody();
+//
+//        return claims.getSubject();
+//    }
+//
+//    public boolean validateToken(String token) {
+//        try {
+//            Jwts.parser().setSigningKey(getSigningKey())
+//                    .build()
+//                    .parseClaimsJws(token);
+//            return true;
+//        } catch (Exception exe) {
+//            return false;
+//        }
+//    }
 
 }
