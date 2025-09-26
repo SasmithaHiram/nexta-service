@@ -1,16 +1,10 @@
 package com.sasmitha.lms.controller;
 
 import com.sasmitha.lms.config.JWTUtil;
-import com.sasmitha.lms.dto.AuthResponse;
-import com.sasmitha.lms.dto.UserLoginRequest;
-import com.sasmitha.lms.dto.RegisterRequest;
-import com.sasmitha.lms.dto.UserResponse;
 import com.sasmitha.lms.entity.UserEntity;
 import com.sasmitha.lms.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api/auth")
