@@ -2,6 +2,7 @@ package com.sasmitha.lms.service.impl;
 
 import com.sasmitha.lms.config.JWTUtil;
 import com.sasmitha.lms.dto.AuthResponse;
+import com.sasmitha.lms.dto.User;
 import com.sasmitha.lms.dto.UserLoginRequest;
 import com.sasmitha.lms.dto.RegisterRequest;
 import com.sasmitha.lms.entity.UserEntity;
@@ -10,6 +11,9 @@ import com.sasmitha.lms.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -42,6 +46,27 @@ public class AuthServiceImpl implements AuthService {
         }
 
         String token = jwtUtil.generateToken(user.getEmail());
-        return new AuthResponse(token);
+        return new AuthResponse("Bearer", token, user.getRole());
+    }
+
+    @Override
+    public String resetPassword(String email) {
+        return "";
+    }
+
+    @Override
+    public List<User> users() {
+        List<UserEntity> userEntities = authRepository.findAll();
+
+        List<User> users = new ArrayList<>();
+
+        for (UserEntity userEntity: userEntities) {
+            User user = new User();
+            user.setUsername(userEntity.getUsername());
+            user.setEmail(userEntity.getEmail());
+            user.setRole(userEntity.getRole());
+            users.add(user);
+        }
+        return users;
     }
 }
