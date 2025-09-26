@@ -30,4 +30,8 @@ public class AuthController {
     public AuthResponse userLogin(@RequestBody UserLoginRequest userLoginRequest) {
         return userService.login(userLoginRequest);
     }
+
+    public String resetPassword(@RequestBody String email) {
+        return userService.resetPassword(email);
+    }
 }
