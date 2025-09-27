@@ -7,16 +7,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.HashSet;
-import java.util.Set;
-
 @Entity
 @Setter
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "users")
-public class UserEntity {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -30,11 +27,6 @@ public class UserEntity {
     @Column(nullable = false)
     private String password;
 
-    @ElementCollection(fetch = FetchType.EAGER)
     @Enumerated(EnumType.STRING)
-    private Set<Role> roles;
-
-
-
-
+    private Role role;
 }
