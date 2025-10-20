@@ -11,9 +11,13 @@ import org.springframework.web.bind.annotation.*;
 public class AuthController {
     private final AuthServiceImpl authServiceImpl;
 
-    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/register")
     public void create(@RequestBody UserRegisterRequest userRegisterRequest) {
         authServiceImpl.createUser(userRegisterRequest);
+    }
+
+    @PostMapping("/login")
+    public void login(LoginRequest loginRequest) {
+        authServiceImpl.loginUser(loginRequest);
     }
 }

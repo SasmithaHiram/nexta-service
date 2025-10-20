@@ -21,4 +21,18 @@ public class AuthServiceImpl {
         authRepository.save(user);
     }
 
+    public LoginResponse loginUser(LoginRequest loginRequest) {
+        User user = authRepository.findByEmail(loginRequest.getEmail()).orElse(null);
+
+        if (user == null) {
+            return new LoginResponse("User not found", null);
+        }
+
+        if (!bCryptPasswordEncoder.matches(loginRequest.getPassword(), user.getPassword())) {
+            return new LoginResponse("Invalid password", null);
+        }
+        System.out.println("User logged in: " + user.getEmail());
+        return new LoginResponse("Login successful", "Done");
+
+    }
 }
