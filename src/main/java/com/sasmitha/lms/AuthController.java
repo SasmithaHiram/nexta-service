@@ -1,7 +1,7 @@
 package com.sasmitha.lms;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.access.prepost.PreAuthorize;
+//import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -17,7 +17,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public void login(LoginRequest loginRequest) {
-        authServiceImpl.loginUser(loginRequest);
+    public LoginResponse login(@RequestBody LoginRequest loginRequest) {
+        return authServiceImpl.loginUser(loginRequest);
     }
 }
