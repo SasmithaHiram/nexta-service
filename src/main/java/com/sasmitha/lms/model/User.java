@@ -12,16 +12,17 @@ import java.util.Set;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
+@ToString(exclude = "password")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Enumerated(EnumType.STRING)
+    private Role role;
     private String firstName;
     private String lastName;
     private String email;
-    @Enumerated(EnumType.STRING)
-    private Role role;
+    private String password;
 //    @OneToMany(mappedBy = "teacher")
 //    private Set<Course> courses;
 }
