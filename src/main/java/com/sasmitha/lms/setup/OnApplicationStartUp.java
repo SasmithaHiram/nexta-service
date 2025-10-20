@@ -1,6 +1,6 @@
 package com.sasmitha.lms.setup;
 
-import com.sasmitha.lms.AuthRepository;
+import com.sasmitha.lms.repository.AuthRepository;
 import com.sasmitha.lms.model.User;
 import com.sasmitha.lms.util.Role;
 import lombok.RequiredArgsConstructor;

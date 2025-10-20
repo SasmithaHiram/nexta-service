@@ -1,5 +1,9 @@
-package com.sasmitha.lms;
+package com.sasmitha.lms.controller;
 
+import com.sasmitha.lms.service.AuthServiceImpl;
+import com.sasmitha.lms.dto.LoginRequest;
+import com.sasmitha.lms.dto.LoginResponse;
+import com.sasmitha.lms.dto.UserRegisterRequest;
 import lombok.RequiredArgsConstructor;
 //import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;

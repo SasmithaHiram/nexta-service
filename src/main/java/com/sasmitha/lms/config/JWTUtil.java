@@ -1,4 +1,4 @@
-package com.sasmitha.lms;
+package com.sasmitha.lms.config;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;

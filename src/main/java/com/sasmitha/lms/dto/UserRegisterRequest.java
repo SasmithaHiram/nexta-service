@@ -1,4 +1,4 @@
-package com.sasmitha.lms;
+package com.sasmitha.lms.dto;
 
 import com.sasmitha.lms.util.Role;
 import lombok.*;

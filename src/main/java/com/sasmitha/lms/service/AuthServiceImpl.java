@@ -1,6 +1,11 @@
-package com.sasmitha.lms;
+package com.sasmitha.lms.service;
 
+import com.sasmitha.lms.config.JWTUtil;
+import com.sasmitha.lms.dto.LoginRequest;
+import com.sasmitha.lms.dto.LoginResponse;
+import com.sasmitha.lms.dto.UserRegisterRequest;
 import com.sasmitha.lms.model.User;
+import com.sasmitha.lms.repository.AuthRepository;
 import lombok.RequiredArgsConstructor;
 //import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;

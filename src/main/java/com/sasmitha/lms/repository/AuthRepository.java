@@ -1,4 +1,4 @@
-package com.sasmitha.lms;
+package com.sasmitha.lms.repository;
 
 import com.sasmitha.lms.model.User;
 import com.sasmitha.lms.util.Role;

@@ -1,5 +1,6 @@
-package com.sasmitha.lms;
+package com.sasmitha.lms.service;
 
+import com.sasmitha.lms.repository.AuthRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
