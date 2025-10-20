@@ -16,7 +16,7 @@ public class Course {
     private Long id;
     private String title;
     private String description;
-    @ManyToOne
-    @JoinColumn(name = "teacher_id", nullable = false)
-    private User teacher;
+//    @ManyToOne
+//    @JoinColumn(name = "teacher_id", nullable = false)
+//    private User teacher;
 }

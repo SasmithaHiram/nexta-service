@@ -22,6 +22,6 @@ public class User {
     private String email;
     @Enumerated(EnumType.STRING)
     private Role role;
-    @OneToMany(mappedBy = "teacher")
-    private Set<Course> courses;
+//    @OneToMany(mappedBy = "teacher")
+//    private Set<Course> courses;
 }
