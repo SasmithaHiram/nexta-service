@@ -8,13 +8,14 @@ import com.sasmitha.lms.model.User;
 import com.sasmitha.lms.repository.AuthRepository;
 import lombok.RequiredArgsConstructor;
 //import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
 public class AuthServiceImpl {
     private final AuthRepository authRepository;
-    //private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final JWTUtil jwtUtil;
 
     public void createUser(UserRegisterRequest userRegisterRequest) {
@@ -23,7 +24,7 @@ public class AuthServiceImpl {
         user.setFirstName(userRegisterRequest.getFirstName());
         user.setLastName(userRegisterRequest.getLastName());
         user.setEmail(userRegisterRequest.getEmail());
-        user.setPassword(userRegisterRequest.getPassword());
+        user.setPassword(bCryptPasswordEncoder.encode(userRegisterRequest.getPassword()));
         authRepository.save(user);
     }
 
@@ -34,7 +35,7 @@ public class AuthServiceImpl {
             return new LoginResponse("User not found", null);
         }
 
-        if (!loginRequest.getPassword().equals(user.getPassword())) {
+        if (!bCryptPasswordEncoder.matches(loginRequest.getPassword(), user.getPassword())) {
             return new LoginResponse("Invalid password", null);
         }
         String token = jwtUtil.generateToken(loginRequest.getEmail(), user.getRole().name());

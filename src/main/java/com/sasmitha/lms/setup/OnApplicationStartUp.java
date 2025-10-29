@@ -28,7 +28,7 @@ public class OnApplicationStartUp {
             user.setFirstName("Sasmitha Hiram");
             user.setLastName("Mendis");
             user.setEmail("sasmithahiram2003@gmail.com");
-            user.setPassword("123");
+            user.setPassword(bCryptPasswordEncoder.encode("123"));
             authRepository.save(user);
         }
     }
