@@ -6,6 +6,7 @@ import com.sasmitha.lms.dto.LoginResponse;
 import com.sasmitha.lms.dto.UserRegisterRequest;
 import lombok.RequiredArgsConstructor;
 //import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -16,6 +17,7 @@ public class AuthController {
     private final AuthServiceImpl authServiceImpl;
 
     @PostMapping("/register")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public void create(@RequestBody UserRegisterRequest userRegisterRequest) {
         authServiceImpl.createUser(userRegisterRequest);
     }

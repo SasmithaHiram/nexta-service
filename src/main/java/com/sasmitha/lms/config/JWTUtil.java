@@ -3,6 +3,7 @@ package com.sasmitha.lms.config;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.security.Key;
@@ -10,8 +11,10 @@ import java.util.Date;
 
 @Component
 public class JWTUtil {
-    private final String jwtSecret = "MySuperSuperSecretKeyForJWTTesting_123456789012345678901234567890"; // production: use env variable
-    private final long jwtExpirationMs = 3600000; // 1 hour
+    @Value("${jwt.secret}")
+    private String jwtSecret;
+    @Value("${jwt.expiration}")
+    private long jwtExpirationMs;
 
     private Key getSigningKey() {
         return Keys.hmacShaKeyFor(jwtSecret.getBytes());
