@@ -9,7 +9,7 @@ import lombok.*;
 @NoArgsConstructor
 @ToString
 public class UserRegisterRequest {
-    private Role role;
+    private String role;
     private String firstName;
     private String lastName;
     private String email;

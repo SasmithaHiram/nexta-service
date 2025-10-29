@@ -4,6 +4,7 @@ import com.sasmitha.lms.config.JWTUtil;
 import com.sasmitha.lms.dto.LoginRequest;
 import com.sasmitha.lms.dto.LoginResponse;
 import com.sasmitha.lms.dto.UserRegisterRequest;
+import com.sasmitha.lms.model.Role;
 import com.sasmitha.lms.model.User;
 import com.sasmitha.lms.repository.AuthRepository;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +21,8 @@ public class AuthServiceImpl {
 
     public void createUser(UserRegisterRequest userRegisterRequest) {
         User user = new User();
-        user.setRole(userRegisterRequest.getRole());
+        Role role = new Role();
+        role.setName(userRegisterRequest.getRole());
         user.setFirstName(userRegisterRequest.getFirstName());
         user.setLastName(userRegisterRequest.getLastName());
         user.setEmail(userRegisterRequest.getEmail());
@@ -38,7 +40,7 @@ public class AuthServiceImpl {
         if (!bCryptPasswordEncoder.matches(loginRequest.getPassword(), user.getPassword())) {
             return new LoginResponse("Invalid password", null);
         }
-        String token = jwtUtil.generateToken(loginRequest.getEmail(), user.getRole().name());
+        String token = jwtUtil.generateToken(loginRequest.getEmail(), user.getRole().getName());
         return new LoginResponse("Login successful", token);
 
     }

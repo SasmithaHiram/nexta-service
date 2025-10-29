@@ -17,7 +17,7 @@ public class AuthController {
     private final AuthServiceImpl authServiceImpl;
 
     @PostMapping("/register")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('SYSTEM_ADMIN')")
     public void create(@RequestBody UserRegisterRequest userRegisterRequest) {
         authServiceImpl.createUser(userRegisterRequest);
     }
