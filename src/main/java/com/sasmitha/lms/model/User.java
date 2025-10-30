@@ -3,6 +3,8 @@ package com.sasmitha.lms.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "users")
 @Setter
@@ -22,6 +24,10 @@ public class User {
     private String lastName;
     private String email;
     private String password;
-//    @OneToMany(mappedBy = "teacher")
-//    private Set<Course> courses;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "user_modules",
+    joinColumns = @JoinColumn(name = "user_id"),
+    inverseJoinColumns = @JoinColumn(name = "module_id"))
+    private List<Module> modules;
 }

@@ -3,8 +3,10 @@ package com.sasmitha.lms.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Entity
-@Table(name = "courses")
+@Table(name = "modules")
 @Setter
 @Getter
 @AllArgsConstructor
@@ -16,7 +18,7 @@ public class Module {
     private Long id;
     private String title;
     private String description;
-//    @ManyToOne
-//    @JoinColumn(name = "teacher_id", nullable = false)
-//    private User teacher;
+
+    @ManyToMany(mappedBy = "modules")
+    private List<User> users;
 }
