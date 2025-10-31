@@ -7,10 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Set;
 
@@ -21,7 +18,17 @@ import java.util.Set;
 public class RoleController {
     private final RoleServiceImpl roleServiceImpl;
 
-    @GetMapping("/")
+    @PostMapping
+    @PreAuthorize("hasAuthority('SYSTEM_ADMIN')")
+    public ResponseEntity<RoleDTO> create(@RequestBody RoleDTO roleDTO) {
+        RoleDTO role = roleServiceImpl.create(roleDTO);
+
+        return (role == null)
+            ? ResponseEntity.status(HttpStatus.NOT_FOUND).body(null)
+                : ResponseEntity.status(HttpStatus.CREATED).body(role);
+    }
+
+    @GetMapping
     @PreAuthorize("hasAuthority('SYSTEM_ADMIN')")
     public ResponseEntity<Set<RoleDTO>> findAll() {
         Set<RoleDTO> roles = roleServiceImpl.findAll();

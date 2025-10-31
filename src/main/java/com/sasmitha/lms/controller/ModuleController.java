@@ -19,7 +19,7 @@ import java.util.List;
 public class ModuleController {
     private final ModuleServiceImpl moduleServiceImpl;
 
-    @GetMapping("/")
+    @GetMapping
     @PreAuthorize("hasAuthority('SYSTEM_ADMIN')")
     public ResponseEntity<List<ModuleDTO>> getAll() {
         List<ModuleDTO> modules = moduleServiceImpl.getAll();

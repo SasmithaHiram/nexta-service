@@ -25,4 +25,11 @@ public class RoleServiceImpl {
             return rolesFromDatabase.stream().map(role -> new RoleDTO(role.getId(), role.getName())).collect(Collectors.toSet());
         }
     }
+
+    public RoleDTO create(RoleDTO roleDTO) {
+        Role role = new Role();
+        role.setName(roleDTO.getName());
+        Role saved = roleRepository.save(role);
+        return new RoleDTO(saved.getId(), saved.getName());
+    }
 }
