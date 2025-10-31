@@ -5,10 +5,7 @@ import com.sasmitha.lms.service.ModuleServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -18,6 +15,10 @@ import java.util.List;
 @CrossOrigin
 public class ModuleController {
     private final ModuleServiceImpl moduleServiceImpl;
+
+//    @PostMapping
+//    @PreAuthorize("hasAuthority('SYSTEM_ADMIN')")
+//    public ResponseEntity<ModuleDTO>
 
     @GetMapping
     @PreAuthorize("hasAuthority('SYSTEM_ADMIN')")

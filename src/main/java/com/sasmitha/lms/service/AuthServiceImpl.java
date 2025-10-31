@@ -7,8 +7,9 @@ import com.sasmitha.lms.dto.UserRegisterRequest;
 import com.sasmitha.lms.model.Role;
 import com.sasmitha.lms.model.User;
 import com.sasmitha.lms.repository.AuthRepository;
+import com.sasmitha.lms.repository.RoleRepository;
 import lombok.RequiredArgsConstructor;
-//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -18,11 +19,15 @@ public class AuthServiceImpl {
     private final AuthRepository authRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final JWTUtil jwtUtil;
+    private final RoleRepository roleRepository;
 
     public void createUser(UserRegisterRequest userRegisterRequest) {
+        Role roleFromDB = roleRepository.findByName(userRegisterRequest.getRole())
+                .orElseThrow(() -> new RuntimeException("Role not found"));
+
         User user = new User();
         Role role = new Role();
-        role.setName(userRegisterRequest.getRole());
+        role.setName(roleFromDB.getName());
         user.setFirstName(userRegisterRequest.getFirstName());
         user.setLastName(userRegisterRequest.getLastName());
         user.setEmail(userRegisterRequest.getEmail());
