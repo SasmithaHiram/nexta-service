@@ -3,6 +3,7 @@ package com.sasmitha.lms.service;
 import com.sasmitha.lms.config.JWTUtil;
 import com.sasmitha.lms.dto.LoginRequest;
 import com.sasmitha.lms.dto.LoginResponse;
+import com.sasmitha.lms.dto.RegisterResponse;
 import com.sasmitha.lms.dto.UserRegisterRequest;
 import com.sasmitha.lms.model.Role;
 import com.sasmitha.lms.model.User;
@@ -21,18 +22,25 @@ public class AuthServiceImpl {
     private final JWTUtil jwtUtil;
     private final RoleRepository roleRepository;
 
-    public void createUser(UserRegisterRequest userRegisterRequest) {
+    public RegisterResponse createUser(UserRegisterRequest userRegisterRequest) {
+        if (authRepository.findByEmail(userRegisterRequest.getEmail()).isPresent()) {
+            throw new RuntimeException(userRegisterRequest.getEmail() + " is already registered");
+        }
         Role roleFromDB = roleRepository.findByName(userRegisterRequest.getRole())
                 .orElseThrow(() -> new RuntimeException("Role not found"));
 
         User user = new User();
-        Role role = new Role();
-        role.setName(roleFromDB.getName());
+        user.setRole(roleFromDB);
         user.setFirstName(userRegisterRequest.getFirstName());
         user.setLastName(userRegisterRequest.getLastName());
         user.setEmail(userRegisterRequest.getEmail());
         user.setPassword(bCryptPasswordEncoder.encode(userRegisterRequest.getPassword()));
         authRepository.save(user);
+
+        return new RegisterResponse(
+                user.getEmail(),
+                roleFromDB.getName()
+        );
     }
 
     public LoginResponse loginUser(LoginRequest loginRequest) {
