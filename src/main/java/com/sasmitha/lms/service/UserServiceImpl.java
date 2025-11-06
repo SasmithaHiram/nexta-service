@@ -1,5 +1,6 @@
 package com.sasmitha.lms.service;
 
+import com.sasmitha.lms.dto.ModuleDTO;
 import com.sasmitha.lms.model.Module;
 import com.sasmitha.lms.model.User;
 import com.sasmitha.lms.repository.AuthRepository;
@@ -46,13 +47,15 @@ public class UserServiceImpl {
         moduleRepository.save(module);
     }
 
-    public List<String> modulesByStudentId(Long studentId) {
-        moduleRepository.findModuleByStudentId(studentId);
+    public List<ModuleDTO> modulesByStudentId(Long studentId) {
+        List<Module> moduleByStudentId = moduleRepository.findModuleByStudentId(studentId);
 
-        if (moduleByStudentId.isEmpty()) {
-            return null;
-        } else {
-            return moduleByStudentId;
-        }
+            return moduleByStudentId
+                    .stream()
+                    .map(module -> new ModuleDTO(
+                                module.getTitle(),
+                                module.getDescription()
+                        ))
+                    .toList();
     }
 }

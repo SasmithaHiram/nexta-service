@@ -54,7 +54,6 @@ public class AuthServiceImpl {
             return new LoginResponse("Invalid password", null);
         }
         String token = jwtUtil.generateToken(loginRequest.getEmail(), user.getRole().getName());
-        return new LoginResponse("Login successful", token);
-
+        return new LoginResponse(user.getEmail(), token);
     }
 }
