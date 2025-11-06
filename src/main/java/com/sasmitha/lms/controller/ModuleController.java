@@ -25,7 +25,7 @@ public class ModuleController {
         if (module == null) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } else {
-            return new ResponseEntity<>(HttpStatus.CREATED);
+            return new ResponseEntity<>(module, HttpStatus.CREATED);
         }
     }
 
