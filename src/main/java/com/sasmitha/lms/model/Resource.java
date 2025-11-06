@@ -6,32 +6,30 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Entity
-@Table(name = "modules")
+@Table(name = "resources")
 @Setter
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class Module {
+public class Resource {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
-    private String description;
+    private String type;
+    private String url;
 
     @CreationTimestamp
     @Column(updatable = false)
-    private LocalDateTime createdAt;
+    private LocalDateTime createAt;
 
     @UpdateTimestamp
-    private LocalDateTime updatedAt;
+    private LocalDateTime updateAt;
 
-    @ManyToMany(mappedBy = "modules")
-    private List<User> users;
-
-    @OneToMany(mappedBy = "module", cascade = CascadeType.ALL)
-    private List<Resource> resources;
+    @ManyToOne
+    @JoinColumn(name = "module_id")
+    private Module module;
 }

@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor
 @CrossOrigin
-public class AuthController {
+public class    AuthController {
     private final AuthServiceImpl authServiceImpl;
 
     @PostMapping("/register")
@@ -25,9 +25,9 @@ public class AuthController {
         RegisterResponse user = authServiceImpl.createUser(userRegisterRequest);
 
         if (user == null) {
-            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } else {
-            return new ResponseEntity<>(user, HttpStatus.OK);
+            return new ResponseEntity<>(user, HttpStatus.CREATED);
         }
     }
 

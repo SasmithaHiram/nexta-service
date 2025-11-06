@@ -14,6 +14,15 @@ import java.util.List;
 public class ModuleServiceImpl {
     private final ModuleRepository moduleRepository;
 
+    public ModuleDTO create(ModuleDTO moduleDTO) {
+        Module module = new Module();
+        module.setTitle(moduleDTO.getTitle());
+        module.setDescription(moduleDTO.getDescription());
+        moduleRepository.save(module);
+
+        return new ModuleDTO(module.getTitle(), module.getDescription());
+    }
+
     public List<ModuleDTO> getAll() {
         List<Module> modulesFromDB = moduleRepository.findAll();
 
@@ -21,11 +30,8 @@ public class ModuleServiceImpl {
             return Collections.emptyList();
         } else {
             return modulesFromDB.stream().map(module -> new ModuleDTO(
-                    module.getId(),
                     module.getTitle(),
-                    module.getDescription(),
-                    module.getCreatedAt(),
-                    module.getUpdatedAt()
+                    module.getDescription()
             )).toList();
         }
     }

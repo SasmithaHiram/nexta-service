@@ -10,9 +10,6 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @ToString
 public class ModuleDTO {
-    private Long id;
     private String title;
     private String description;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
 }
