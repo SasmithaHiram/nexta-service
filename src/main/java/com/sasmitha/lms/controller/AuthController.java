@@ -6,14 +6,13 @@ import com.sasmitha.lms.dto.LoginRequest;
 import com.sasmitha.lms.dto.LoginResponse;
 import com.sasmitha.lms.dto.UserRegisterRequest;
 import lombok.RequiredArgsConstructor;
-//import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("/auth")
 @RequiredArgsConstructor
 @CrossOrigin
 public class    AuthController {
