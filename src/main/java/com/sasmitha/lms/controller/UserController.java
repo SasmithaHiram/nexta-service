@@ -22,4 +22,8 @@ public class UserController {
         return ResponseEntity.ok("Users assigned to module successfully");
     }
 
+    public List<String> modulesByUserId(@PathVariable Long studentId) {
+        return userServiceImpl.modulesByStudentId(studentId);
+    }
+
 }

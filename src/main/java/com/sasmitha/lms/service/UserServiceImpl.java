@@ -6,6 +6,7 @@ import com.sasmitha.lms.repository.AuthRepository;
 import com.sasmitha.lms.repository.ModuleRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -43,5 +44,15 @@ public class UserServiceImpl {
             authRepository.save(user);
         }
         moduleRepository.save(module);
+    }
+
+    public List<String> modulesByStudentId(Long studentId) {
+        moduleRepository.findModuleByStudentId(studentId);
+
+        if (moduleByStudentId.isEmpty()) {
+            return null;
+        } else {
+            return moduleByStudentId;
+        }
     }
 }
